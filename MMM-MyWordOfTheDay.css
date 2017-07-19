@@ -1,0 +1,36 @@
+.MMM-MyWordOfTheDay {
+  font-size: 20px;
+  line-height: 25px;
+  text-align: left;
+}
+
+.MMM-MyWordOfTheDay .word {
+  color: #FFFFFF;
+  font-size: 32px;
+  line-height: 48px;
+}
+
+.MMM-MyWordOfTheDay .pronouciation {
+  color: #FFFFFF;
+}
+
+.MMM-MyWordOfTheDay .definition {
+  margin-top: 12px;
+}
+
+.MMM-MyWordOfTheDay .definition .part-of-speech {
+  font-weight: bold;
+  display: block;
+}
+
+.MMM-MyWordOfTheDay .definition .definition-text {
+  display: block;
+}
+
+.MMM-MyWordOfTheDay .note {
+  margin-top: 18px;
+  border-top: solid 1px #222222;
+  padding-top: 12px;
+  font-size: 17px;
+  line-height: 20px;
+}
