@@ -22,7 +22,7 @@ This shows you Wordnik's Word of the Day.
   <tbody>
     <tr>
       <td><code>apiKey</code></td>
-      <td><strong>REQUIRED</strong> You need to get an API key from Wordnik.com: <code>http://developer.wordnik.com/</code>.</td>
+      <td><strong>REQUIRED</strong><br />You need to get an API key from Wordnik.com: <code>http://developer.wordnik.com/</code>.<br /><strong>Type</strong> <code>String</code></td>
     </tr>
   </tbody>
 </table>
