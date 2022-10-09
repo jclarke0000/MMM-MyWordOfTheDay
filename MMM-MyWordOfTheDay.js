@@ -11,11 +11,6 @@
 
 Module.register("MMM-MyWordOfTheDay",{
 
-  // Define required scripts.
-  getScripts: function() {
-    return ["moment.js"];
-  },
-  
   // Define required styles.
   getStyles: function () {
     return ["MMM-MyWordOfTheDay.css"];
@@ -30,16 +25,13 @@ Module.register("MMM-MyWordOfTheDay",{
 
     var self = this;
     setInterval(function() {
-      if (self.lastDate == null || !self.lastDate.isSame(moment(), "day")) {
-        self.sendSocketNotification("GET_WORD", self.config.apiKey);
-      }
+      self.sendSocketNotification("GET_WORD", self.config.apiKey);
     }, 60 * 60 * 1000); //update once an hour
   },
 
   socketNotificationReceived: function(notification, payload) {
     if (notification === "WORD_UP") {
       this.loading = false;
-      this.lastDate = moment();
       this.wordData = payload;
       this.updateDom(2000);
     }

@@ -23,6 +23,6 @@
   },
   "homepage": "https://github.com/jclarke0000/MMM-MyWordOfTheDay#readme",
   "dependencies": {
-    "request": "^2.81.0"
+    "axios": "^1.1.2"
   }
 }

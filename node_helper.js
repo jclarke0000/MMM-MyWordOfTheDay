@@ -6,7 +6,7 @@
  */
 
 var NodeHelper = require("node_helper");
-var request = require("request");
+var axios = require("axios");
 
 module.exports = NodeHelper.create({
 
@@ -20,16 +20,15 @@ module.exports = NodeHelper.create({
     }
   },
 
-  getWord: function(apiKey) {
+  getWord: async function(apiKey) {
 
     var self = this;
     var WoD_URL = "http://api.wordnik.com:80/v4/words.json/wordOfTheDay?api_key=" + apiKey;
 
-    request(WoD_URL, function (error, response, body) {
+    axios.get(WoD_URL)
+     .then( (response) => {
 
-      if (!error && response.statusCode == 200) {
-
-        var wordnikJSON = JSON.parse(body);
+        var wordnikJSON = response.data;
         var wordData = new Object({
           word: wordnikJSON.word,
           definition: wordnikJSON.definitions[0], //just take the first definition
@@ -39,38 +38,30 @@ module.exports = NodeHelper.create({
           wordData.note = wordnikJSON.note;
         } 
 
-
         //try and get pronunciation key
         var pronounciationKeyURL = "http://api.wordnik.com:80/v4/word.json/" + wordnikJSON.word + "/pronunciations?useCanonical=false&limit=50&api_key=" + apiKey;
 
-        request(pronounciationKeyURL, function(error2, response2, body2) {
+        axios.get(pronounciationKeyURL)
+          .then( (response2) => {
 
-          if (!error2 && response2.statusCode == 200) {
-
-            var pronKey = JSON.parse(body2);
+            var pronKey = response2.data;
             if (pronKey.length > 0) {
               wordData.pronounciation = pronKey[0].raw;
             }
-          } else {
+
+          })
+          .catch( (error2) => {
             console.log("[MMM-MyWordOfTheDay] **ERROR getting Pronounciation Key ** : " + error2);
-          }
+          })
+          .finally( () => {
+            self.sendSocketNotification("WORD_UP", wordData);
+          })
 
-          // console.log(JSON.stringify(wordData));
-
-
-          self.sendSocketNotification("WORD_UP", wordData);
-
-        });
-
-
-
-      } else {
-          console.log("[MMM-MyWordOfTheDay] **ERROR getting Word of the Day ** : " + error);
-      }
-
-
-    });
-  }
+      })
+      .catch( (error) => {
+        console.log("[MMM-MyWordOfTheDay] **ERROR getting Word of the Day ** : " + error);      
+      });
+  },
 
 
 
