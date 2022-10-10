@@ -8,9 +8,15 @@
   color: #FFFFFF;
   font-size: 32px;
   line-height: 48px;
+  position:  relative;
 }
 
-.MMM-MyWordOfTheDay .pronouciation {
+.MMM-MyWordOfTheDay .linguistics > span:not(:first-child):before {
+  content:  " • ";
+}
+
+.MMM-MyWordOfTheDay .pronouciation,
+.MMM-MyWordOfTheDay .hyphentation {
   color: #FFFFFF;
 }
 
@@ -27,6 +33,13 @@
   display: block;
 }
 
+.MMM-MyWordOfTheDay .definition .example {
+  font-style: italic;
+  font-size: 18px;
+  display: block;
+  margin-left:  18px;
+}
+
 .MMM-MyWordOfTheDay .note {
   margin-top: 18px;
   border-top: solid 1px #222222;
@@ -34,3 +47,24 @@
   font-size: 17px;
   line-height: 20px;
 }
+
+.MMM-MyWordOfTheDay .scrabble-score {
+  font-size:  24px;
+  display: inline-block;
+  white-space: nowrap;
+  position: absolute;
+  right: 0;
+}
+
+.MMM-MyWordOfTheDay .scrabble-tile {
+  display: inline-block;
+  border: solid 2px #ffffff;
+  border-radius: 4px;
+  height:  28px;
+  width:  28px;
+  line-height: 28px;
+  text-align: center;
+  font-family:  "Times", "Times New Roman", serif;
+  font-weight:  bold;
+}
+

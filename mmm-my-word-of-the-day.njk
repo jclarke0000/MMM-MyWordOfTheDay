@@ -1,0 +1,51 @@
+<div class="wrapper">
+
+  {% if loading %}
+
+    <div class="dimmed light small">{{ phrases.loading | safe }}</div>
+
+  {% else %}
+
+  	<div class="word">
+  		{{wordData.word}}
+  		<span class="scrabble-score">
+  			<span class="scrabble-tile">S</span>
+  			{{ scrabbleScore }}
+  		</span>
+  	</div>
+
+  	<div class="linguistics">
+  	{% if (wordData.pronounciation) %}
+
+	  <span class="pronouciation">{{ wordData.pronounciation }}</span>	 
+
+  	{% endif %}
+
+  	{% if (wordData.hyphentation) %}
+
+	  <span class="hyphentation">{{ wordData.hyphentation }}</span>	 
+
+  	{% endif %}
+  	</div>
+
+  	<div class="definition">
+  		<span class="part-of-speech">{{ wordData.definition.partOfSpeech }}</span>
+  		<span class="definition-text">{{ wordData.definition.text }}</span>
+
+  		{% if (wordData.example) %}
+
+  			<span class="example">{{ wordData.example }}</span>
+
+  		{% endif %}
+
+  	</div>
+
+  	{% if (wordData.note) %}
+
+  		<div class="note">{{ wordData.note }}</div>
+
+  	{% endif %}
+
+  {% endif %}
+
+</div>
